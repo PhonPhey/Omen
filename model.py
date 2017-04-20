@@ -1,9 +1,11 @@
 import peewee as pw
+import os
 
 try:
     main_db = pw.SqliteDatabase('db/main.db')
 
-except peewee.OperationalError:
+except pw.OperationalError:
+    os.makedirs('db/')
     main_db_file = open('db/main.db', 'w+')
     main_db = pw.SqliteDatabase('db/main.db')
 
@@ -26,6 +28,9 @@ class things(pw.Model):
         database = main_db
 
 # DEBUG RUN
-players.create_table()
-things.create_table()
+#try:
+#    players.create_table()
+#    things.create_table()
+#except pw.OperationalError:
+#    pass
 # DEBUG STOP
