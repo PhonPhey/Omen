@@ -24,7 +24,7 @@ except pw.OperationalError:
 
 # class represents players
 class players(pw.Model):
-    #name of object of [class_object]
+    '''name of object of [class_object]'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -33,7 +33,7 @@ class players(pw.Model):
 
 # class represents inventory
 class inventory(pw.Model):
-    # Id of the player
+    ''' Id of the player'''
     player_id = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -42,6 +42,7 @@ class inventory(pw.Model):
 
 # class represents local_events
 class local_events(pw.Model):
+    '''class represents local_events'''
     json_event_obj = pw.TextField()
 
     class Meta:
@@ -49,6 +50,7 @@ class local_events(pw.Model):
 
 # class represents global_events
 class global_events(pw.Model):
+    '''class represents global_events'''
     json_event_obj = pw.TextField()
 
     class Meta:
