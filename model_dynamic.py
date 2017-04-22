@@ -22,35 +22,31 @@ except pw.OperationalError:
     # Dynamic DataBase object
     dynamic_db = pw.SqliteDatabase('db/dynamic.db')
 
-# class represents players
 class players(pw.Model):
-    '''it class create table with players'''
+    '''class represents players'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
     class Meta:
         database = dynamic_db
 
-# class represents inventory
 class inventory(pw.Model):
-    '''it class create table with enventory'''
+    '''class represents inventory'''
     player_id = pw.TextField()
     json_meta_obj = pw.TextField()
 
     class Meta:
         database = dynamic_db
 
-# class represents local_events
 class local_events(pw.Model):
-    '''it class create table with local_events'''
+    '''# class represents local_events'''
     json_event_obj = pw.TextField()
 
     class Meta:
         database = dynamic_db
 
-# class represents global_events
 class global_events(pw.Model):
-    '''it class create table with global_events'''
+    '''class represents global_events'''
     json_event_obj = pw.TextField()
 
     class Meta:
