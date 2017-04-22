@@ -23,36 +23,32 @@ except pw.OperationalError:
     # Static DataBase object
     static_db = pw.SqliteDatabase('db/static.db')
 
-# class represents things
 class things(pw.Model):
-    '''it class create table with things'''
+    '''class represents things'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
     class Meta:
         database = static_db
 
-# class represents monsters
 class monsters(pw.Model):
-    '''it class create table with monsters'''
+    '''class represents monsters'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
     class Meta:
         database = static_db
 
-# class represents npcs
 class npcs(pw.Model):
-    '''it class create table with npcs'''
+    '''class represents npcs'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
     class Meta:
         database = static_db
 
-# class represents events
 class events(pw.Model):
-    '''it class create table with events'''
+    '''class represents events'''
     name = pw.TextField()
     json_obj = pw.TextField()
 

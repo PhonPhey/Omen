@@ -39,7 +39,7 @@ class inventory(pw.Model):
         database = dynamic_db
 
 class local_events(pw.Model):
-    '''# class represents local_events'''
+    '''class represents local_events'''
     json_event_obj = pw.TextField()
 
     class Meta:
