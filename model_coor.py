@@ -21,29 +21,29 @@ except pw.OperationalError:
     # Coor DataBase object
     coor_db = pw.SqliteDatabase('db/coor.db')
 
-# class represents npcs
 class npcs(pw.Model):
+    '''class represents npcs'''
     coordinate = pw.TextField()
 
     class Meta:
         database = coor_db
 
-# class represents players
 class players(pw.Model):
+    '''class represents players'''
     coordinate = pw.TextField()
 
     class Meta:
         database = coor_db
 
-# class represents things
 class things(pw.Model):
+    '''class represents things'''
     coordinate = pw.TextField()
 
     class Meta:
         database = coor_db
 
-# class represents etc
 class etc(pw.Model):
+    '''class represents etc'''
     coordinate = pw.TextField()
 
     class Meta:
