@@ -25,7 +25,7 @@ except pw.OperationalError:
 
 # class represents things
 class things(pw.Model):
-
+    '''it class create table with things'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -34,7 +34,7 @@ class things(pw.Model):
 
 # class represents monsters
 class monsters(pw.Model):
-
+    '''it class create table with monsters'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -43,7 +43,7 @@ class monsters(pw.Model):
 
 # class represents npcs
 class npcs(pw.Model):
-
+    '''it class create table with npcs'''
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -52,7 +52,7 @@ class npcs(pw.Model):
 
 # class represents events
 class events(pw.Model):
-
+    '''it class create table with events'''
     name = pw.TextField()
     json_obj = pw.TextField()
 
