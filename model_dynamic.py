@@ -1,7 +1,10 @@
 '''Module consist dynamic for Omen'''
 
-import peewee as pw
 import os
+
+import peewee as pw
+
+import header as h
 
 '''
 Declaration of common variable:
@@ -12,15 +15,16 @@ Declaration of common variable:
 
 # Trying connect to file DB
 try:
-    dynamic_db = pw.SqliteDatabase('db/dynamic.db')
+    dynamic_db = pw.SqliteDatabase(h.DYNAMIC_DB)
 
 # Detecting error and correct
 except pw.OperationalError:
-    os.makedirs('db/')
+    #Create db path if it none
+    os.makedirs(h.DB_PATH)
     # Creating DataBase file
-    dynamic_db_file = open('db/dynamic.db', 'w+')
+    dynamic_db_file = open(h.DYNAMIC_DB, 'w+')
     # Dynamic DataBase object
-    dynamic_db = pw.SqliteDatabase('db/dynamic.db')
+    dynamic_db = pw.SqliteDatabase(h.DYNAMIC_DB)
 
 class players(pw.Model):
     '''class represents players'''
@@ -53,11 +57,11 @@ class global_events(pw.Model):
         database = dynamic_db
 
 # DEBUG RUN
-#try:
-  #  players.create_table()
-  #  inventory.create_table()
-  #  local_events.create_table()
-  #  global_events.create_table()
-#except pw.OperationalError:
-   # pass
+try:
+    players.create_table()
+    inventory.create_table()
+    local_events.create_table()
+    global_events.create_table()
+except pw.OperationalError:
+    pass
 # DEBUG STOP

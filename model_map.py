@@ -1,7 +1,12 @@
-'''Module consist coor for Omen'''
+'''Module consist map for Omen'''
+
+import os
 
 import peewee as pw
-import os
+
+import header as h
+
+
 
 '''
 Declaration of common variable:
@@ -11,50 +16,59 @@ Declaration of common variable:
 
 # Trying connect to file DB
 try:
-    coor_db = pw.SqliteDatabase('db/coor.db')
+    map_db = pw.SqliteDatabase(h.MAP_DB)
 
 # Detecting error and correct
 except pw.OperationalError:
-    os.makedirs('db/')
+    os.makedirs(h.DB_PATH)
     # Creating DataBase file
-    coor_db_file = open('db/coor.db', 'w+')
+    map_db_file = open(h.MAP_DB, 'w+')
     # Coor DataBase object
-    coor_db = pw.SqliteDatabase('db/coor.db')
+    map_db = pw.SqliteDatabase(h.MAP_DB)
 
 class npcs(pw.Model):
     '''class represents npcs'''
     coordinate = pw.TextField()
 
     class Meta:
-        database = coor_db
+        database = map_db
 
 class players(pw.Model):
     '''class represents players'''
     coordinate = pw.TextField()
 
     class Meta:
-        database = coor_db
+        database = map_db
 
 class things(pw.Model):
     '''class represents things'''
     coordinate = pw.TextField()
 
     class Meta:
-        database = coor_db
+        database = map_db
+
+class map_obj(pw.Model):
+    ''' class represent object on map '''
+    coordinate = pw.TextField()
+    json_obj = pw.TextField()
+
+    class Meta:
+        database = map_db
 
 class etc(pw.Model):
     '''class represents etc'''
     coordinate = pw.TextField()
 
     class Meta:
-        database = coor_db
+        database = map_db
 
 # DEBUG RUN
-#try:
-   # npcs.create_table()
-    #players.create_table()
-    #things.create_table()
-    #etc.create_table()
-#except pw.OperationalError:
-    #pass
+try:
+    npcs.create_table()
+    players.create_table()
+    things.create_table()
+    map_obj.create_table()
+    etc.create_table()
+except pw.OperationalError:
+    pass
 # DEBUG STOP
