@@ -28,6 +28,7 @@ except pw.OperationalError:
 
 class npcs(pw.Model):
     '''class represents npcs'''
+    id = pw.PrimaryKeyField()
     coordinate = pw.TextField()
 
     class Meta:
@@ -35,6 +36,7 @@ class npcs(pw.Model):
 
 class players(pw.Model):
     '''class represents players'''
+    id = pw.PrimaryKeyField()
     coordinate = pw.TextField()
 
     class Meta:
@@ -42,6 +44,7 @@ class players(pw.Model):
 
 class things(pw.Model):
     '''class represents things'''
+    id = pw.PrimaryKeyField()
     coordinate = pw.TextField()
 
     class Meta:
@@ -49,6 +52,7 @@ class things(pw.Model):
 
 class map_obj(pw.Model):
     ''' class represent object on map '''
+    id = pw.PrimaryKeyField()
     coordinate = pw.TextField()
     json_obj = pw.TextField()
 
@@ -57,6 +61,7 @@ class map_obj(pw.Model):
 
 class etc(pw.Model):
     '''class represents etc'''
+    id = pw.PrimaryKeyField()
     coordinate = pw.TextField()
 
     class Meta:

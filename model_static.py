@@ -48,6 +48,7 @@ except pw.OperationalError:
 
 class things(pw.Model):
     '''class represents things'''
+    id = pw.PrimaryKeyField()
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -56,6 +57,7 @@ class things(pw.Model):
 
 class monsters(pw.Model):
     '''class represents monsters'''
+    id = pw.PrimaryKeyField()
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -64,6 +66,7 @@ class monsters(pw.Model):
 
 class npcs(pw.Model):
     '''class represents npcs'''
+    id = pw.PrimaryKeyField()
     name = pw.TextField()
     json_meta_obj = pw.TextField()
 
@@ -72,6 +75,7 @@ class npcs(pw.Model):
 
 class events(pw.Model):
     '''class represents events'''
+    id = pw.PrimaryKeyField()
     name = pw.TextField()
     json_obj = pw.TextField()
 
