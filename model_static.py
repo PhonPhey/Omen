@@ -48,36 +48,36 @@ except pw.OperationalError:
 
 class things(pw.Model):
     '''class represents things'''
-    id = pw.PrimaryKeyField()
-    name = pw.TextField()
-    json_meta_obj = pw.TextField()
+    id = h.ID
+    name = h.NAME
+    json_meta_obj = h.JMO
 
     class Meta:
         database = static_db
 
 class monsters(pw.Model):
     '''class represents monsters'''
-    id = pw.PrimaryKeyField()
-    name = pw.TextField()
-    json_meta_obj = pw.TextField()
+    id = h.ID
+    name = h.NAME
+    json_meta_obj = h.JMO
 
     class Meta:
         database = static_db
 
 class npcs(pw.Model):
     '''class represents npcs'''
-    id = pw.PrimaryKeyField()
-    name = pw.TextField()
-    json_meta_obj = pw.TextField()
+    id = h.ID
+    name = h.NAME
+    json_meta_obj = h.JMO
 
     class Meta:
         database = static_db
 
 class events(pw.Model):
     '''class represents events'''
-    id = pw.PrimaryKeyField()
-    name = pw.TextField()
-    json_obj = pw.TextField()
+    id = h.ID
+    name = h.NAME
+    json_obj = h.JO
 
     class Meta:
         database = static_db

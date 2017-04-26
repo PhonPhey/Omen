@@ -28,41 +28,41 @@ except pw.OperationalError:
 
 class npcs(pw.Model):
     '''class represents npcs'''
-    id = pw.PrimaryKeyField()
-    coordinate = pw.TextField()
+    id = h.ID
+    coordinate = h.COORDINATE
 
     class Meta:
         database = map_db
 
 class players(pw.Model):
     '''class represents players'''
-    id = pw.PrimaryKeyField()
-    coordinate = pw.TextField()
+    id = h.ID
+    coordinate = h.COORDINATE
 
     class Meta:
         database = map_db
 
 class things(pw.Model):
     '''class represents things'''
-    id = pw.PrimaryKeyField()
-    coordinate = pw.TextField()
+    id = h.ID
+    coordinate = h.COORDINATE
 
     class Meta:
         database = map_db
 
 class map_obj(pw.Model):
     ''' class represent object on map '''
-    id = pw.PrimaryKeyField()
-    coordinate = pw.TextField()
-    json_obj = pw.TextField()
+    id = h.ID
+    coordinate = h.COORDINATE
+    json_obj = h.JO
 
     class Meta:
         database = map_db
 
 class etc(pw.Model):
     '''class represents etc'''
-    id = pw.PrimaryKeyField()
-    coordinate = pw.TextField()
+    id = h.ID
+    coordinate = h.COORDINATE
 
     class Meta:
         database = map_db

@@ -1,19 +1,22 @@
 ''' Header module for Omen Engine '''
 
-### PATHs
+import peewee as pw
+
+
+# PATHs
 DB_PATH = 'db/'
 MAP_DB = 'db/map.db'
 STATIC_DB = 'db/static.db'
 DYNAMIC_DB = 'db/dynamic.db'
 
-### DBs info
+# DBs info
 
 #> DINAMIC_DB
 DYNAMIC_DB_TABLES = ['players', 'invent', 'le', 'ge']
 DYNAMIC_DB_PLAYERS = [3, "id", "name", "json_meta_obj"]
 DYNAMIC_DB_INVENT = [3, "id", "player_id", "json_meta_obj"]
-DYNAMIC_DB_LE = [2, "id", "json_even_obj"]
-DYNAMIC_DB_GE = [2, "id", "json_even_obj",]
+DYNAMIC_DB_LE = [2, "id", "json_event_obj"]
+DYNAMIC_DB_GE = [2, "id", "json_event_obj", ]
 
 #>STATIC_DB
 STATIC_DB_TABLES = ['things', 'monsters', 'npcs', 'events']
@@ -28,3 +31,12 @@ MAP_DB_NPCS = [2, "id", "coordinate"]
 MAP_DB_PLAYERS = [2, "id", "coordinate"]
 MAP_DB_THINGS = [2, "id", "coordinate"]
 MAP_DB_MO = [3, "id", "coordinate", "json_obj"]
+
+# -||-> SPECIAL_CONST
+ID = pw.PrimaryKeyField(unique=True)
+COORDINATE = pw.TextField()
+NAME = pw.TextField()
+JMO = pw.TextField()
+JO = pw.TextField()
+JEV = pw.TextField()
+PID = pw.TextField(unique=True)
