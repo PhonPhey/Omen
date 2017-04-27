@@ -36,7 +36,7 @@ class dbMnp():
         elif db_name == "map":
             self.db = pw.SqliteDatabase('db/' + db_name + '.db')
 
-        elif db_name == None:
+        elif db_name == 0:
             pass
 
         else:
@@ -45,93 +45,179 @@ class dbMnp():
     def _random_id(self, base_id):
         random.seed(id)
 
-        return random.randint(1, 10000)
+        return random.randint(1, 10000) + random.randint(random.randint(1, 5000), 8000)
 
     def add_record(self, nm_table, data):
-        mnp_func = dbMnp(None)
+        ''' Function for add record '''
+        mnp_func = dbMnp(0)
 
         if nm_table in h.DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
             if nm_table is 'players':
                 modeld.players.create(id=mnp_func._random_id(modeld.players.id),
                                       name=data[0], json_meta_obj=data[1])
 
-                modeld.players.save()
+                modeld.players.update()
 
             elif nm_table is 'invent':
                 modeld.inventory.create(id=mnp_func._random_id(modeld.inventory.id),
                                         player_id=data[0], json_meta_obj=data[1])
 
-                modeld.invent.save()
+                modeld.inventory.update()
 
             elif nm_table is 'le':
                 modeld.local_events.create(id=mnp_func._random_id(modeld.local_events.id),
-                                           json_event_obj=data[0])
-                modeld.local_events.save()
+                                           json_event_obj=data)
+                modeld.local_events.update()
 
             elif nm_table is 'ge':
                 modeld.global_events.create(id=mnp_func._random_id(modeld.global_events.id),
-                                            json_event_obj=data[0])
-                modeld.global_events.save()
+                                            json_event_obj=data)
+                modeld.global_events.update()
 
         if nm_table in h.STATIC_DB_TABLES and self.db_nm == "static":
             if nm_table is 'things':
                 models.things.create(id=mnp_func._random_id(models.things.id),
                                      name=data[0], json_meta_obj=data[1])
-                models.things.save()
+                models.things.update()
 
             elif nm_table is 'monsters':
                 models.monsters.create(id=mnp_func._random_id(models.monsters.id),
                                        name=data[0], json_meta_obj=data[1])
-                models.monsters.save()
+                models.monsters.update()
 
             elif nm_table is 'npcs':
                 models.npcs.create(id=mnp_func._random_id(models.npcs.id),
-                                   json_meta_obj=data[0])
-                models.npcs.save()
+                                   name=data[0], json_meta_obj=data[1])
+                models.npcs.update()
 
             elif nm_table is 'events':
                 models.events.create(id=mnp_func._random_id(models.events.id),
-                                     json_meta_obj=data[0])
-                models.events.save()
+                                     name=data[0], json_obj=data[1])
+                models.events.update()
 
         if nm_table in h.MAP_DB_TABLES and self.db_nm == "map":
             if nm_table is 'npcs':
                 modelm.npcs.create(id=mnp_func._random_id(modelm.npcs.id),
-                                   name=data[0], json_meta_obj=data[1])
-                modelm.npcs.save()
+                                   coordinate=data[0])
+                modelm.npcs.update()
 
             elif nm_table is 'players':
-                modelm.players.create(id=mnp_func._random_id(modelm.players.id),
-                                      player_id=data[0], json_meta_obj=data[1])
-                modelm.players.save()
+                modelm.players.create(id=mnp_func._random_id(modelm.players.id), link_id=mnp_func._random_id(modelm.players.id),
+                                      coordinate=data)
+                modelm.players.update()
 
             elif nm_table is 'things':
                 modelm.things.create(id=mnp_func._random_id(modelm.things.id),
-                                     json_meta_obj=data[0])
-                modelm.things.save()
+                                     coordinate=data)
+                modelm.things.update()
 
             elif nm_table is 'mo':
                 modelm.map_obj.create(id=mnp_func._random_id(modelm.map_obj.id),
-                                      json_meta_obj=data[0])
-                modelm.map_obj.save()
+                                      coordinate=data[0], json_obj=data[1])
+                modelm.map_obj.update()
+
+    def del_record(self, nm_table, record_id):
+        ''' function for delete record '''
+        mnp_func = dbMnp(0)
+
+        if nm_table in h.DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
+            if nm_table is 'players':
+                record = modeld.players.get(modeld.players.id == record_id)
+                record.delete_instance()
+
+                modeld.players.update()
+
+            elif nm_table is 'invent':
+                record = modeld.inventory.get(
+                    modeld.inventory.id == record_id)
+                record.delete_instance()
+
+                modeld.inventory.update()
+
+            elif nm_table is 'le':
+                record = modeld.local_events.get(
+                    modeld.local_events.id == record_id)
+                record.delete_instance()
+
+                modeld.local_events.update()
+
+            elif nm_table is 'ge':
+                record = modeld.global_events.get(
+                    modeld.global_events.id == record_id)
+                record.delete_instance()
+
+                modeld.global_events.update()
+
+        if nm_table in h.STATIC_DB_TABLES and self.db_nm == "static":
+            if nm_table is 'things':
+                record = models.things.get(models.things.id == record_id)
+                record.delete_instance()
+
+                models.things.update()
+
+            elif nm_table is 'monsters':
+                record = models.monsters.get(
+                    models.monsters.id == record_id)
+                record.delete_instance()
+                models.monsters.update()
+
+            elif nm_table is 'npcs':
+                record = models.npcs.get(models.npcs.id == record_id)
+                record.delete_instance()
+
+                models.npcs.update()
+
+            elif nm_table is 'events':
+                record = models.events.get(models.events.id == record_id)
+                record.delete_instance()
+
+                models.events.update()
+
+        if nm_table in h.MAP_DB_TABLES and self.db_nm == "map":
+            if nm_table is 'npcs':
+                record = modelm.npcs.get(modelm.npcs.id == record_id)
+                record.delete_instance()
+
+                modelm.npcs.update()
+
+            elif nm_table is 'players':
+                modelm.players.delete().where(modelm.players.id == record_id).execute()
+
+                modelm.players.update()
+
+            elif nm_table is 'things':
+                record = modelm.things.get(modelm.things.id == record_id)
+                record.delete_instance()
+
+                modelm.things.update()
+
+            elif nm_table is 'mo':
+                record = modelm.map_obj.get(modelm.map_obj.id == record_id)
+                record.delete_instance()
+
+                modelm.map_obj.update()
 
 
-# DEBUG RUN
 if __name__ == "__main__":
+    '''
     db_dynamic = dbMnp("dynamic")
-    db_dynamic.add_record("le", ("{'test': 5}"))
-    db_dynamic.add_record("players", ("{'test': 5}"))
-    db_dynamic.add_record("invent", ("{'test': 5}"))
+    db_dynamic.add_record("le", ("test"))
+    db_dynamic.add_record("ge", ("test"))
+    db_dynamic.add_record("players", ("test", "test"))
+    db_dynamic.add_record("invent", ("test", "test"))
 
     db_static = dbMnp("static")
-    db_static.add_record("monsters", ("Bat", "{'str': 5}"))
-    db_static.add_record("things", ("Bat", "{'str': 5}"))
-    db_static.add_record("npcs", ("Bat", "{'str': 5}"))
-    db_static.add_record("events", ("Bat", "{'str': 5}"))
+    db_static.add_record("monsters", ("Bat", "test"))
+    db_static.add_record("things", ("Bat", "test"))
+    db_static.add_record("npcs", ("Bat", "test"))
+    db_static.add_record("events", ("Bat", "test"))
 
     db_map = dbMnp("map")
-    db_map.add_record("npcs", ("Bat", "{'str': 5}"))
-    db_map.add_record("players", ("Bat", "{'str': 5}"))
-    db_map.add_record("things", ("Bat", "{'str': 5}"))
-    db_map.add_record("mo", ("Bat", "{'str': 5}"))
-# DEBUG STOP
+    db_map.add_record("npcs", ("Bat", "test"))
+    db_map.add_record("players", ("Bat", "test"))
+    db_map.add_record("things", ("Bat", "test"))
+    db_map.add_record("mo", ("Bat", "test"))
+    '''
+    #db_map.del_record("players", 2446)
+
+# DEBUG STOP/

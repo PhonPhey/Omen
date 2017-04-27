@@ -33,10 +33,10 @@ MAP_DB_THINGS = [2, "id", "coordinate"]
 MAP_DB_MO = [3, "id", "coordinate", "json_obj"]
 
 # -||-> SPECIAL_CONST
-ID = pw.PrimaryKeyField(unique=True)
+ID = pw.PrimaryKeyField(unique=True, primary_key=True)
 COORDINATE = pw.TextField()
 NAME = pw.TextField()
 JMO = pw.TextField()
 JO = pw.TextField()
 JEV = pw.TextField()
-PID = pw.TextField(unique=True)
+PID = pw.TextField()
