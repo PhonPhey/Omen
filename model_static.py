@@ -4,7 +4,7 @@ import os
 
 import peewee as pw
 
-import header as h
+from header import *
 
 '''
 Declaration of common variable:
@@ -13,18 +13,26 @@ Declaration of common variable:
     database: variable of meta classes
 '''
 
+ID = pw.PrimaryKeyField(unique=True, primary_key=True)
+COORDINATE = pw.TextField()
+NAME = pw.TextField()
+JMO = pw.TextField()
+JO = pw.TextField()
+JEV = pw.TextField()
+PID = pw.TextField()
+
 # Trying connect to file DB
 try:
     # Static DataBase object
-    static_db = pw.SqliteDatabase(h.STATIC_DB)
+    static_db = pw.SqliteDatabase(STATIC_DB)
 
 # Detecting error and correct
 except pw.OperationalError:
-    os.makedirs(h.DB_PATH)
+    os.makedirs(DB_PATH)
     # Creating DataBase file
-    static_db_file = open(h.STATIC_DB, 'w+')
+    static_db_file = open(STATIC_DB, 'w+')
     # Static DataBase object
-    static_db = pw.SqliteDatabase(h.STATIC_DB)
+    static_db = pw.SqliteDatabase(STATIC_DB)
 
 '''
 Declaration of common variable:
@@ -48,41 +56,42 @@ except pw.OperationalError:
 
 class things(pw.Model):
     '''class represents things'''
-    id = h.ID
-    name = h.NAME
-    json_meta_obj = h.JMO
+    id = ID
+    name = NAME
+    json_meta_obj = JMO
 
     class Meta:
         database = static_db
 
 class monsters(pw.Model):
     '''class represents monsters'''
-    id = h.ID
-    name = h.NAME
-    json_meta_obj = h.JMO
+    id = ID
+    name = NAME
+    json_meta_obj = JMO
 
     class Meta:
         database = static_db
 
 class npcs(pw.Model):
     '''class represents npcs'''
-    id = h.ID
-    name = h.NAME
-    json_meta_obj = h.JMO
+    id = ID
+    name = NAME
+    json_meta_obj = JMO
 
     class Meta:
         database = static_db
 
 class events(pw.Model):
     '''class represents events'''
-    id = h.ID
-    name = h.NAME
-    json_obj = h.JO
+    id = ID
+    name = NAME
+    json_obj = JO
 
     class Meta:
         database = static_db
 
 # DEBUG RUN
+'''
 try:
     things.create_table()
     monsters.create_table()
@@ -90,4 +99,5 @@ try:
     events.create_table()
 except pw.OperationalError:
     pass
+'''
 # DEBUG STOP

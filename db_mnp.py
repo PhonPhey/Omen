@@ -5,16 +5,23 @@ import random
 
 import peewee as pw
 
-import header as h
+from header import *
 import model_dynamic as modeld
 import model_map as modelm
 import model_static as models
-
 
 '''
 Declaration of common variable:
     self.db: variable for database object, puts in self list
 '''
+
+ID = pw.PrimaryKeyField(unique=True, primary_key=True)
+COORDINATE = pw.TextField()
+NAME = pw.TextField()
+JMO = pw.TextField()
+JO = pw.TextField()
+JEV = pw.TextField()
+PID = pw.TextField()
 
 
 class dbMnp():
@@ -50,7 +57,7 @@ class dbMnp():
         ''' Function for add record '''
         mnp_func = dbMnp(0)
 
-        if nm_table in h.DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
+        if nm_table in DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
             if nm_table == 'players':
                 modeld.players.create(id=mnp_func._random_id(modeld.players.id),
                                       name=data[0], json_meta_obj=data[1])
@@ -73,7 +80,7 @@ class dbMnp():
                                             json_event_obj=data)
                 modeld.global_events.update()
 
-        if nm_table in h.STATIC_DB_TABLES and self.db_nm == "static":
+        if nm_table in STATIC_DB_TABLES and self.db_nm == "static":
             if nm_table == 'things':
                 models.things.create(id=mnp_func._random_id(models.things.id),
                                      name=data[0], json_meta_obj=data[1])
@@ -94,14 +101,15 @@ class dbMnp():
                                      name=data[0], json_obj=data[1])
                 models.events.update()
 
-        if nm_table in h.MAP_DB_TABLES and self.db_nm == "map":
+        if nm_table in MAP_DB_TABLES and self.db_nm == "map":
             if nm_table == 'npcs':
                 modelm.npcs.create(id=mnp_func._random_id(modelm.npcs.id),
                                    coordinate=data[0])
                 modelm.npcs.update()
 
             elif nm_table == 'players':
-                modelm.players.create(id=mnp_func._random_id(modelm.players.id), link_id=mnp_func._random_id(modelm.players.id),
+                modelm.players.create(id=mnp_func._random_id(modelm.players.id),
+                                      link_id=mnp_func._random_id(modelm.players.id),
                                       coordinate=data)
                 modelm.players.update()
 
@@ -119,7 +127,7 @@ class dbMnp():
         '''function for updating record'''
         mnp_func = dbMnp(0)
 
-        if nm_table in h.DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
+        if nm_table in DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
             if nm_table == 'players':
                 if nm_column == 'name':
                     modeld.players.update(name=data).where(
@@ -145,7 +153,7 @@ class dbMnp():
                     modeld.global_events.update(json_event_obj=data).where(
                         modeld.global_events.id == record_id).execute()
 
-        if nm_table in h.STATIC_DB_TABLES and self.db_nm == "static":
+        if nm_table in STATIC_DB_TABLES and self.db_nm == "static":
             if nm_table == 'things':
                 if nm_column == 'name':
                     models.things.update(name=data).where(
@@ -178,7 +186,7 @@ class dbMnp():
                     models.events.update(json_meta_obj=data).where(
                         models.events.id == record_id).execute()
 
-        if nm_table in h.MAP_DB_TABLES and self.db_nm == "map":
+        if nm_table in MAP_DB_TABLES and self.db_nm == "map":
             if nm_table == 'npcs':
                 if nm_column == 'coordinate':
                     modelm.npcs.update(coordinate=data).where(
@@ -206,7 +214,7 @@ class dbMnp():
         ''' function for delete record '''
         mnp_func = dbMnp(0)
 
-        if nm_table in h.DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
+        if nm_table in DYNAMIC_DB_TABLES and self.db_nm == "dynamic":
             if nm_table == 'players':
                 modeld.players.delete().where(modeld.players.id == record_id).execute()
 
@@ -228,7 +236,7 @@ class dbMnp():
 
                 modeld.global_events.update()
 
-        if nm_table in h.STATIC_DB_TABLES and self.db_nm == "static":
+        if nm_table in STATIC_DB_TABLES and self.db_nm == "static":
             if nm_table == 'things':
                 models.things.delete().where(models.things.id == record_id).execute()
 
@@ -249,7 +257,7 @@ class dbMnp():
 
                 models.events.update()
 
-        if nm_table in h.MAP_DB_TABLES and self.db_nm == "map":
+        if nm_table in MAP_DB_TABLES and self.db_nm == "map":
             if nm_table == 'npcs':
                 modelm.npcs.delete().where(modelm.npcs.id == record_id).execute()
 
@@ -302,8 +310,6 @@ def _edit_test_record(id):
 
 
 if __name__ == "__main__":
-    #_start_test_db()
-    #_del_test_record(8008)
-    _edit_test_record(11455)
-
-
+    _start_test_db()
+    #_del_test_record(13272)
+    _edit_test_record(8999)

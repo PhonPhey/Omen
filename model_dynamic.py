@@ -4,7 +4,15 @@ import os
 
 import peewee as pw
 
-import header as h
+from header import *
+
+ID = pw.PrimaryKeyField(unique=True, primary_key=True)
+COORDINATE = pw.TextField()
+NAME = pw.TextField()
+JMO = pw.TextField()
+JO = pw.TextField()
+JEV = pw.TextField()
+PID = pw.TextField()
 
 '''
 Declaration of common variable:
@@ -15,23 +23,23 @@ Declaration of common variable:
 
 # Trying connect to file DB
 try:
-    dynamic_db = pw.SqliteDatabase(h.DYNAMIC_DB)
+    dynamic_db = pw.SqliteDatabase(DYNAMIC_DB)
 
 # Detecting error and correct
 except pw.OperationalError:
     # Create db path if it none
-    os.makedirs(h.DB_PATH)
+    os.makedirs(DB_PATH)
     # Creating DataBase file
-    dynamic_db_file = open(h.DYNAMIC_DB, 'w+')
+    dynamic_db_file = open(DYNAMIC_DB, 'w+')
     # Dynamic DataBase object
-    dynamic_db = pw.SqliteDatabase(h.DYNAMIC_DB)
+    dynamic_db = pw.SqliteDatabase(DYNAMIC_DB)
 
 
 class players(pw.Model):
     '''class represents players'''
-    id = h.ID
-    name = h.NAME
-    json_meta_obj = h.JMO
+    id = ID
+    name = NAME
+    json_meta_obj = JMO
 
     class Meta:
         database = dynamic_db
@@ -39,9 +47,9 @@ class players(pw.Model):
 
 class inventory(pw.Model):
     '''class represents inventory'''
-    id = h.ID
-    player_id = h.PID
-    json_meta_obj = h.JMO
+    id = ID
+    player_id = PID
+    json_meta_obj = JMO
 
     class Meta:
         database = dynamic_db
@@ -49,8 +57,8 @@ class inventory(pw.Model):
 
 class local_events(pw.Model):
     '''class represents local_events'''
-    id = h.ID
-    json_event_obj = h.JEV
+    id = ID
+    json_event_obj = JEV
 
     class Meta:
         database = dynamic_db
@@ -58,14 +66,15 @@ class local_events(pw.Model):
 
 class global_events(pw.Model):
     '''class represents global_events'''
-    id = h.ID
-    json_event_obj = h.JEV
+    id = ID
+    json_event_obj = JEV
 
     class Meta:
         database = dynamic_db
 
 
 # DEBUG RUN
+'''
 try:
     players.create_table()
     inventory.create_table()
@@ -73,4 +82,5 @@ try:
     global_events.create_table()
 except pw.OperationalError:
     pass
+'''
 # DEBUG STOP
