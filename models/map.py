@@ -1,12 +1,12 @@
 '''Module consist map for Omen'''
 
+import sys
 import os
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 import peewee as pw
 
 from header import *
-
-
 
 '''
 Declaration of common variable:
@@ -14,76 +14,38 @@ Declaration of common variable:
     database: variable of meta classes
 '''
 
-ID = pw.PrimaryKeyField(unique=True, primary_key=True)
-COORDINATE = pw.TextField()
-NAME = pw.TextField()
-JMO = pw.TextField()
-JO = pw.TextField()
-JEV = pw.TextField()
-PID = pw.TextField()
+class BaseModel(pw.Model):
+    ''' Base class for all models'''
+    json_meta_obj = pw.TextField()
+    id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
-# Trying connect to file DB
-try:
-    map_db = pw.SqliteDatabase(MAP_DB)
+    class Meta:
+        database =  pw.SqliteDatabase(MAP_DB)
 
-# Detecting error and correct
-except pw.OperationalError:
-    os.makedirs(DB_PATH)
-    # Creating DataBase file
-    map_db_file = open(MAP_DB, 'w+')
-    # Coor DataBase object
-    map_db = pw.SqliteDatabase(MAP_DB)
-
-class npcs(pw.Model):
+class Npcs(BaseModel):
     '''class represents npcs'''
-    id = ID
-    coordinate = COORDINATE
+    coordinate = pw.TextField()
 
-    class Meta:
-        database = map_db
 
-class players(pw.Model):
+class Players(BaseModel):
     '''class represents players'''
-    id = ID
-    coordinate = COORDINATE
+    coordinate = pw.TextField()
 
-    class Meta:
-        database = map_db
-
-class things(pw.Model):
+class Things(BaseModel):
     '''class represents things'''
-    id = ID
-    coordinate = COORDINATE
+    coordinate = pw.TextField()
 
-    class Meta:
-        database = map_db
 
-class map_obj(pw.Model):
+class MapObj(BaseModel):
     ''' class represent object on map '''
-    id = ID
-    coordinate = COORDINATE
-    json_obj = JO
+    coordinate = pw.TextField()
+    json_obj = pw.TextField()
 
-    class Meta:
-        database = map_db
 
-class etc(pw.Model):
+class Etc(BaseModel):
     '''class represents etc'''
-    id = ID
-    coordinate = COORDINATE
+    coordinate = pw.TextField()
 
-    class Meta:
-        database = map_db
 
-# DEBUG RUN
-'''
-try:
-    npcs.create_table()
-    players.create_table()
-    things.create_table()
-    map_obj.create_table()
-    etc.create_table()
-except pw.OperationalError:
-    pass
-'''
-# DEBUG STOP
+map_db = pw.SqliteDatabase(MAP_DB)
+map_db.create_tables([Npcs, Players, Things, MapObj, Etc])

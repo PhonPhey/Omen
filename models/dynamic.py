@@ -1,18 +1,12 @@
 '''Module consist dynamic for Omen'''
 
+import sys
 import os
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 import peewee as pw
 
 from header import *
-
-ID = pw.PrimaryKeyField(unique=True, primary_key=True)
-COORDINATE = pw.TextField()
-NAME = pw.TextField()
-JMO = pw.TextField()
-JO = pw.TextField()
-JEV = pw.TextField()
-PID = pw.TextField()
 
 '''
 Declaration of common variable:
@@ -21,67 +15,34 @@ Declaration of common variable:
     database: variable of meta classes
 '''
 
-# Trying connect to file DB
-try:
-    dynamic_db = pw.SqliteDatabase(DYNAMIC_DB)
 
-# Detecting error and correct
-except pw.OperationalError:
-    # Create db path if it none
-    os.makedirs(DB_PATH)
-    # Creating DataBase file
-    dynamic_db_file = open(DYNAMIC_DB, 'w+')
-    # Dynamic DataBase object
-    dynamic_db = pw.SqliteDatabase(DYNAMIC_DB)
-
-class baseModel(pw.Model):
+class BaseModel(pw.Model):
     ''' Base class for all models'''
     json_meta_obj = pw.TextField()
     id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
     class Meta:
-        database = dynamic_db
+        database =  pw.SqliteDatabase(DYNAMIC_DB)
 
-class players(pw.Model):
+class Players(BaseModel):
     '''class represents players'''
     name = pw.TextField()
 
-    class Meta:
-        database = dynamic_db
 
-
-class inventory(pw.Model):
+class Inventory(BaseModel):
     '''class represents inventory'''
     player_id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
-    class Meta:
-        database = dynamic_db
 
-
-class local_events(pw.Model):
+class LocalEvents(BaseModel):
     '''class represents local_events'''
     json_event_obj = pw.TextField()
 
-    class Meta:
-        database = dynamic_db
 
-
-class global_events(pw.Model):
+class GlobalEvents(BaseModel):
     '''class represents global_events'''
     json_event_obj = pw.TextField()
 
-    class Meta:
-        database = dynamic_db
 
-
-# DEBUG RUN
-'''
-try:
-    players.create_table()
-    inventory.create_table()
-    local_events.create_table()
-    global_events.create_table()
-except pw.OperationalError:
-    pass
-'''
-# DEBUG STOP
+dynamic_db = pw.SqliteDatabase(DYNAMIC_DB)
+dynamic_db.create_tables([Players, Inventory, LocalEvents, GlobalEvents])
