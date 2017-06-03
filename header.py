@@ -1,8 +1,5 @@
 ''' Header module for Omen Engine '''
 
-import peewee as pw
-
-
 # PATHs
 DB_PATH = 'db/'
 MAP_DB = 'db/map.db'
@@ -31,4 +28,3 @@ MAP_DB_NPCS = [2, "id", "coordinate"]
 MAP_DB_PLAYERS = [2, "id", "coordinate"]
 MAP_DB_THINGS = [2, "id", "coordinate"]
 MAP_DB_MO = [3, "id", "coordinate", "json_obj"]
-
