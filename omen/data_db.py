@@ -2,7 +2,7 @@
 
 import peewee as pw
 
-from header import *
+from omen.header import *
 
 '''
 Declaration of common variable:
