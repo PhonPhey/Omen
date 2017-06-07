@@ -2,9 +2,9 @@
 
 import hashlib
 
-from omen.omen import header as h
-from omen.omen import shell
-from omen.omen import models
+from omen import header as h
+from omen import shell
+from omen import models
 
 from peewee import  *
 
