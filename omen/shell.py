@@ -2,7 +2,7 @@
 from jsonsempai import *
 
 def _valid():
-    
+    pass
 
 def create_player():
     player_name = input("Введите имя: ")
@@ -16,6 +16,4 @@ def create_player():
     json_meta_obj["char"] = int(input("Введите мудрость: "))
     json_meta_obj["dex"] = int(input("Введите харизму: "))
     
-
-
-    
+    print(json_meta_obj)
