@@ -7,7 +7,7 @@ therefore it is assumed to be part of version control checkout.
 Without this configuration present, some functionality in the IDE may be limited or fail altogether.
 -->
     <python-data xmlns="http://nbpython.dev.java.net/ns/php-project/1">
-        <main.file>omen/__init__.py</main.file>
+        <main.file>__init__.py</main.file>
         <platform.active>Python_3.6.1</platform.active>
     </python-data>
 </project-shared-configuration>
