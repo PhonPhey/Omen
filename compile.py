@@ -6,7 +6,7 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
 ext_modules = [
-    Extension("build.data_db", ["omen/data_db.py"]),
+    Extension("build.data_db", ["data_db.py"]),
     ]
 
 setup(
