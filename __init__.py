@@ -1,3 +1,5 @@
 '''Init module'''
 
-import main
+from Omen import header as h
+from Omen import shell
+from Omen import util
