@@ -20,7 +20,7 @@ class BaseModel(pw.Model):
     id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
     class Meta:
-        database =  pw.SqliteDatabase(PATH_DATA_DB)
+        database =  pw.SqliteDatabase(PATH_DB)
 
 class Player(BaseModel):
     """Class represents players"""
@@ -51,8 +51,8 @@ class Monster(BaseModel):
     name = pw.TextField()
     coordinate = pw.TextField()
 
-class Npc(BaseModel):
-    """Class represents Npcs"""
+class NPC(BaseModel):
+    """Class represents NPC"""
     name = pw.TextField()
     coordinate = pw.TextField()
     

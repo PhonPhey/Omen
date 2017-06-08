@@ -21,17 +21,17 @@ def valid_point(record, max_point, min_point):
 
 
 def init_db():
-    '''Function for inital db if it not inited'''
+    """Function for inital db if it not inited"""
     
-    db  = SqliteDatabase(h.PATH_DATA_DB)
-    db.create_tables([data_db.Player, data_db.Inventory, data_db.Event, data_db.Thing, data_db.Monster, data_db.Npc, data_db.Other])
+    db  = SqliteDatabase(h.PATH_DB)
+    db.create_tables([data_db.Player, data_db.Inventory, data_db.Event, data_db.Thing, data_db.Monster, data_db.NPC, data_db.Other])
     
     
 def check_db():
-    '''Function for check databse hash sum'''
+    """Function for check databse hash sum"""
         
     hash_sha512= hashlib.sha512()
-    file_db = open(h.PATH_DATA_DB, "rb")
+    file_db = open(h.PATH_DB, "rb")
     old_hash = open(h.HASH_SUM_PATH, "rb").read().decode("utf-8")
 
     with open(h.HASH_SUM_PATH, "w") as file_sum:
