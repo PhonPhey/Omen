@@ -2,6 +2,8 @@
 
 import hashlib
 
+from Omen import data_db
+
 from Omen import header as h
 
 from peewee import  *
@@ -21,33 +23,33 @@ def valid_point(record, max_point, min_point):
 def init_db():
     '''Function for inital db if it not inited'''
     
-    db  = SqliteDatabase(h.DATA_DB)
-    db.create_tables([Players, Inventory, Events, Things, Monsters, Npcs, Etc])
+    db  = SqliteDatabase(h.PATH_DATA_DB)
+    db.create_tables([data_db.Player, data_db.Inventory, data_db.Event, data_db.Thing, data_db.Monster, data_db.Npc, data_db.Other])
     
     
 def check_db():
-        '''Function for check databse hash sum'''
+    '''Function for check databse hash sum'''
         
-        hash_sha512= hashlib.sha512()
-        file_db = open(h.DATA_DB, "rb")
-        old_hash = open(h.HASH_SUM_PATH, "rb").read().decode("utf-8")
+    hash_sha512= hashlib.sha512()
+    file_db = open(h.PATH_DATA_DB, "rb")
+    old_hash = open(h.HASH_SUM_PATH, "rb").read().decode("utf-8")
 
-        with open(h.HASH_SUM_PATH, "w") as file_sum:
+    with open(h.HASH_SUM_PATH, "w") as file_sum:
             
-            print("Хеш-сумма из файла: " + old_hash)
+        print("Хеш-сумма из файла: " + old_hash)
             
-            for chunk in iter(lambda: file_db.read(4096), b""):
-                hash_sha512.update(chunk)
+        for chunk in iter(lambda: file_db.read(4096), b""):
+            hash_sha512.update(chunk)
             
-            print("Хеш-сумма базы данных: " + hash_sha512.hexdigest())
+        print("Хеш-сумма базы данных: " + hash_sha512.hexdigest())
                 
-            if old_hash == "":
-                file_sum.write(hash_sha512.hexdigest())
+        if old_hash == "":
+            file_sum.write(hash_sha512.hexdigest())
         
-            elif old_hash != hash_sha512.hexdigest():
-               print(colored("Предупреждение", 'yellow') +": хеш-сумма базы данных несовпадает с контрольной суммой, созданной после прошлого выключения. Авто замена")
-               file_sum.write(hash_sha512.hexdigest())
+        elif old_hash != hash_sha512.hexdigest():
+            print(colored("Предупреждение", 'yellow') +": хеш-сумма базы данных несовпадает с контрольной суммой, созданной после прошлого выключения. Авто замена")
+            file_sum.write(hash_sha512.hexdigest())
                
-            else:
-                file_sum.write(hash_sha512.hexdigest())
+        else:
+            file_sum.write(hash_sha512.hexdigest())
             
