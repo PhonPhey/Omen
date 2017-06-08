@@ -20,7 +20,7 @@ class BaseModel(pw.Model):
     id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
     class Meta:
-        database =  pw.SqliteDatabase(PATH_DB)
+        database =  pw.SqliteDatabase(PATH_DATA_DB)
 
 class Player(BaseModel):
     """Class represents players"""
