@@ -1,11 +1,5 @@
-<<<<<<< Updated upstream
-""" Shell module for Omen Engine """
-from jsonsempai import magic
-from Omen.locale import ru_RU as locale
-=======
 ''' Shell module for Omen Engine '''
 from jsonsempai import magic
->>>>>>> Stashed changes
 
 from Omen.locale import ru_RU as locale
 
@@ -35,24 +29,19 @@ def _menu():
         exit(1)
         
 def init():
-    print("Powder by Omen.\nCirina Studio 2017")
     _menu()
+    print("Powder by Omen.\nCirina Studio 2017\n")
     print(locale.hello)
     while True:
         command = input("\n|=> ")
          
         if command in ("exit", "Exit"):
              print(locale.goodbye)
-<<<<<<< Updated upstream
-             y = False
-             
-=======
              exit(0)
         
         elif command in ("clear", "Clear"):
             os.system("clear")
             
->>>>>>> Stashed changes
         else:
             print(locale.notunderstand)
         
