@@ -1,4 +1,6 @@
-''' Shell module for Omen Engine '''
+""" Shell module for Omen Engine """
+from jsonsempai import magic
+from Omen.locale import ru_RU as locale
 
 def init():
     y = True
@@ -7,9 +9,9 @@ def init():
         command = input("\n|=> ")
          
         if command in ("exit", "Exit"):
-             print("Good buy!")
+             print(locale.goodbye)
              y = False
              
         else:
-            print("Я тебя не понимаю.")
+            print(locale.notunderstand)
         
